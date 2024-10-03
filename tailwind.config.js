@@ -6,7 +6,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+        // Adding new fonts from google font
+        fontFamily: {
+            poppins: "'Poppins', sans-serif",
+            edu: "'Edu AU VIC WA NT Dots', cursive",
+        }
+    },
   },
   plugins: [
     require('daisyui'),
