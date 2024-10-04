@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 export default function Register() {
-    const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const {createUser, updateUserProfile} = useContext(AuthContext);
     const handleRegister = (event)=>{
         event.preventDefault();
         const form = new FormData(event.currentTarget);
@@ -18,12 +20,26 @@ export default function Register() {
 
         createUser(email, password)
         .then((result)=>{
-            console.log(result.user)
+            console.log(result.user);
+            handleUserProfile(name, photo);
+            toast.success("User Registration Successful", {
+              position: "top-right",
+            });
+            navigate(ROUTES.LOGIN);
         })
         .catch((error)=>{
             console.error(error);
         });
     }
+
+    const handleUserProfile = (name, photo) => {
+        const profile = { displayName: name, photoURL: photo };
+        updateUserProfile(profile)
+          .then(() => {})
+          .catch((error) => {
+            console.log(error);
+          });
+    };
 	return (
 		<div>
 			<div className="py-8 bg-base-200 shadow-xl rounded-lg">

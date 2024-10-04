@@ -3,6 +3,8 @@ import {
 	getAuth,
 	onAuthStateChanged,
 	signInWithEmailAndPassword,
+    signInWithPopup,
+    updateProfile,
     signOut,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
@@ -25,6 +27,21 @@ export default function AuthProvider({ children }) {
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
+    const googleSignIn = (provider) => {
+        setLoading(true);
+        return signInWithPopup(auth, provider);
+    };
+
+    const githubSignIn = (provider) => {
+        setLoading(true);
+        return signInWithPopup(auth, provider);
+    };
+
+    const updateUserProfile = (profile)=>{
+        setLoading(true);
+        return updateProfile(auth.currentUser, profile);
+    }
+
 	const logOut = () => {
 		setLoading(true);
 		return signOut(auth);
@@ -45,6 +62,9 @@ export default function AuthProvider({ children }) {
         loading,
 		createUser,
 		signIn,
+        googleSignIn,
+        githubSignIn,
+        updateUserProfile,
         logOut,
 	};
 	return (

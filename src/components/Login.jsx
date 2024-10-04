@@ -1,12 +1,18 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 
 export default function Login() {
     const navigate = useNavigate();
-	const { signIn } = useContext(AuthContext);
+	const { signIn, googleSignIn, githubSignIn, } = useContext(AuthContext);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+    
+    const location = useLocation();
+    console.log("Location in the login page", location);
 	const handleLogin = (event) => {
 		event.preventDefault();
 
@@ -23,13 +29,40 @@ export default function Login() {
 				toast.success("User Login Successful", {
 					position: "top-right",
 				});
-				// navigate(location?.state ? location.state : "/");
-                navigate(ROUTES.HOME);
+				navigate(location?.state ? location.state : ROUTES.HOME);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	};
+
+    const handleGoogleSignIn = ()=>{
+        googleSignIn(googleProvider)
+        .then((result) => {
+          console.log(result.user);
+          toast.success("User Google Login Successful", {
+            position: "top-right",
+          });
+          navigate(location?.state ? location.state : ROUTES.HOME);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    const handleGitHubSignIn = () => {
+        githubSignIn(githubProvider)
+          .then((result) => {
+            console.log(result.user);
+            toast.success("User GitHub Login Successful", {
+              position: "top-right",
+            });
+            navigate(location?.state ? location.state : ROUTES.HOME);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    };
 	return (
 		<div>
 			<div className="py-8 bg-base-200 shadow-xl rounded-lg">
@@ -107,7 +140,7 @@ export default function Login() {
 										</button>
 
 										<button
-											// onClick={handleGoogleSignin}
+											onClick={handleGoogleSignIn}
 											type="button"
 											className="btn btn-outline btn-error mt-2 rounded-md"
 										>
@@ -117,7 +150,7 @@ export default function Login() {
 										</button>
 
 										<button
-											// onClick={handleGitHubSignin}
+											onClick={handleGitHubSignIn}
 											type="button"
 											className="btn btn-outline mt-2 rounded-md"
 										>
