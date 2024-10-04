@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layout/MainLayout";
-import { ROUTES } from "../routes/Routes";
-import HomePage from "../pages/HomePage";
 import Login from "../components/Login";
-import Register from "../components/Register";
-import Products from "../components/Products";
 import ProductDetails from "../components/ProductDetails";
+import Products from "../components/Products";
+import Register from "../components/Register";
+import MainLayout from "../layout/MainLayout";
+import HomePage from "../pages/HomePage";
+import { ROUTES } from "../routes/Routes";
+import PrivateRouter from "./PrivateRouter";
 const router = createBrowserRouter([
 	{
 		path: `${ROUTES.HOME}`,
@@ -18,21 +19,35 @@ const router = createBrowserRouter([
 			},
 			{
 				path: `${ROUTES.LOGIN}`,
-				element: <Login />
+				element: <Login />,
 			},
 			{
 				path: `${ROUTES.REGISTER}`,
-				element: <Register />
+				element: <Register />,
 			},
 			{
 				path: `${ROUTES.PRODUCTS}`,
-				element: <Products />,
-                loader: ()=> fetch(`https://code-course-academy-server.vercel.app/api/products`)
+				element: (
+					<PrivateRouter>
+						<Products />
+					</PrivateRouter>
+				),
+				loader: () =>
+					fetch(
+						`https://code-course-academy-server.vercel.app/api/products`
+					),
 			},
 			{
 				path: `${ROUTES.SINGLE_PRODUCT.STATIC}`,
-				element: <ProductDetails />,
-                // loader: ()=> fetch(`https://code-course-academy-server.vercel.app/api/products`)
+				element: (
+					<PrivateRouter>
+						<ProductDetails />
+					</PrivateRouter>
+				),
+				loader: ({ params }) =>
+					fetch(
+						`https://code-course-academy-server.vercel.app/api/products/${params.id}`
+					),
 			},
 		],
 	},

@@ -88,8 +88,11 @@ export default function Navbar() {
 				<div className="navbar-end space-x-2">
                     {
                         user ? (
-                            <div className="space-x-2">
-                                <span>{user.email}</span>
+                            <div className="flex flex-col items-end gap-1">
+                                <div className="flex items-center gap-1">
+                                    <img className="w-6 rounded-full" src={user.photoURL} />
+                                    <span>{user.displayName || user.email || 'User'}</span>
+                                </div>
                                 <button onClick={handleSignOut}><a className="btn btn-sm btn-outline btn-error">Logout</a></button>
                             </div>
                         ):(
