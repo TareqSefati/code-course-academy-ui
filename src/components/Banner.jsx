@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 export default function Banner() {
   return (
     <section>
-			<div className="hero bg-base-200 shadow-xl rounded-lg mt-5 p-5">
+			<div className="hero bg-base-200 shadow-xl rounded-lg mt-5 px-5">
 				<div className="hero-content flex-col lg:flex-row-reverse">
 					<img
-						src="/images/open-book.jpg"
+						src="/images/banner-3.webp"
 						className="max-w-xl rounded-lg shadow-2xl"
 					/>
 					<div className="space-y-10">
