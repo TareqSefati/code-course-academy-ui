@@ -21,7 +21,7 @@ export default function Login() {
 			.then((result) => {
 				console.log(result.user);
 				toast.success("User Login Successful", {
-					position: "bottom-right",
+					position: "top-right",
 				});
 				// navigate(location?.state ? location.state : "/");
                 navigate(ROUTES.HOME);

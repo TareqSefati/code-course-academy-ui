@@ -4,6 +4,8 @@ import { ROUTES } from "../routes/Routes";
 import HomePage from "../pages/HomePage";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Products from "../components/Products";
+import ProductDetails from "../components/ProductDetails";
 const router = createBrowserRouter([
 	{
 		path: `${ROUTES.HOME}`,
@@ -21,6 +23,16 @@ const router = createBrowserRouter([
 			{
 				path: `${ROUTES.REGISTER}`,
 				element: <Register />
+			},
+			{
+				path: `${ROUTES.PRODUCTS}`,
+				element: <Products />,
+                loader: ()=> fetch(`https://code-course-academy-server.vercel.app/api/products`)
+			},
+			{
+				path: `${ROUTES.SINGLE_PRODUCT.STATIC}`,
+				element: <ProductDetails />,
+                // loader: ()=> fetch(`https://code-course-academy-server.vercel.app/api/products`)
 			},
 		],
 	},

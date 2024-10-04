@@ -48,7 +48,7 @@ export default function Navbar() {
 								<NavLink to={ROUTES.HOME}>Home</NavLink>
 							</li>
 							<li>
-								<NavLink to={ROUTES.BOOKS}>Products</NavLink>
+								<NavLink to={ROUTES.PRODUCTS}>Products</NavLink>
 							</li>
 							<li>
 								<NavLink to={ROUTES.ABOUT}>About</NavLink>
@@ -75,7 +75,7 @@ export default function Navbar() {
 							<NavLink to={ROUTES.HOME}>Home</NavLink>
 						</li>
 						<li>
-							<NavLink to={ROUTES.BOOKS}>Products</NavLink>
+							<NavLink to={ROUTES.PRODUCTS}>Products</NavLink>
 						</li>
 						<li>
 							<NavLink to={ROUTES.ABOUT}>About</NavLink>

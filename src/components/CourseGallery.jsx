@@ -3,7 +3,6 @@ export default function CourseGallery() {
 		<div>
 			<div className="mb-5 mt-10">
 				<h1
-					id="category-name"
 					className="text-center font-semibold text-5xl mb-5"
 				>
 					Course Gallery
