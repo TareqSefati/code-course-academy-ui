@@ -1,7 +1,20 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/Routes";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
 
 export default function Navbar() {
+    const navigate = useNavigate();
+    const {user, logOut} = useContext(AuthContext);
+    const handleSignOut = () => {
+        logOut()
+          .then(() => {
+            navigate(ROUTES.LOGIN);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    };
 	return (
 		<header>
 			<nav className="navbar bg-base-100">
@@ -73,8 +86,20 @@ export default function Navbar() {
 					</ul>
 				</div>
 				<div className="navbar-end space-x-2">
-					<Link><a className="btn">Login</a></Link>
-					<Link><a className="btn">Register</a></Link>
+                    {
+                        user ? (
+                            <div className="space-x-2">
+                                <span>{user.email}</span>
+                                <button onClick={handleSignOut}><a className="btn btn-sm btn-outline btn-error">Logout</a></button>
+                            </div>
+                        ):(
+                            <div className="space-x-2">
+                                <Link to={ROUTES.LOGIN}><a className="btn">Login</a></Link>
+                                <Link to={ROUTES.REGISTER}><a className="btn">Register</a></Link>
+                            </div>
+                        )
+                    }
+					
 				</div>
 			</nav>
 		</header>
