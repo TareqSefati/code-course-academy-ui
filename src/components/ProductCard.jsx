@@ -4,7 +4,6 @@ import { ROUTES } from "../routes/Routes";
 export default function ProductCard({ courseData }) {
 	const {
 		_id,
-		course_id,
 		title,
 		lession,
 		student,
@@ -40,7 +39,7 @@ export default function ProductCard({ courseData }) {
 					<p className="font-semibold">Duration: <span className="italic font-mono">{duration}</span></p>
 					<p className="font-semibold">Price: <span className="italic font-mono">{price}$ </span></p>
 					<div className="card-actions justify-end">
-						<Link to={ROUTES.SINGLE_PRODUCT.DYNAMIC(course_id)}>
+						<Link to={ROUTES.SINGLE_PRODUCT.DYNAMIC(_id)}>
 							<button className="btn btn-neutral btn-sm">
 								Course Details
 							</button>
