@@ -3,9 +3,7 @@ export const ROUTES = {
     LOGIN: "/login",
     REGISTER: "/register",
     PRODUCTS: "/products",
-    AUTHORS: "/authors",
     ABOUT: "/about",
-    BLOG: "/blog",
     FAQ: "/faq",
     SINGLE_PRODUCT: {
         STATIC: "/products/:id",

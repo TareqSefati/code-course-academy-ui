@@ -7,11 +7,14 @@ import MainLayout from "../layout/MainLayout";
 import HomePage from "../pages/HomePage";
 import { ROUTES } from "../routes/Routes";
 import PrivateRouter from "./PrivateRouter";
+import AboutUs from "../components/AboutUs";
+import Faq from "../components/Faq";
+import Error from "../components/Error";
 const router = createBrowserRouter([
 	{
 		path: `${ROUTES.HOME}`,
 		element: <MainLayout />,
-		// errorElement: <NotFoundPage />,
+		errorElement: <Error />,
 		children: [
 			{
 				path: `${ROUTES.HOME}`,
@@ -36,6 +39,7 @@ const router = createBrowserRouter([
 					fetch(
 						`https://code-course-academy-server.vercel.app/api/products`
 					),
+                errorElement: <Error />,
 			},
 			{
 				path: `${ROUTES.SINGLE_PRODUCT.STATIC}`,
@@ -48,6 +52,15 @@ const router = createBrowserRouter([
 					fetch(
 						`https://code-course-academy-server.vercel.app/api/products/${params.id}`
 					),
+                errorElement: <Error />,
+			},
+            {
+				path: `${ROUTES.ABOUT}`,
+				element: <AboutUs />,
+			},
+            {
+				path: `${ROUTES.FAQ}`,
+				element: <Faq />,
 			},
 		],
 	},
