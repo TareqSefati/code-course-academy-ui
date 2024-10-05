@@ -96,9 +96,9 @@ export default function Navbar() {
                                 <button onClick={handleSignOut}><a className="btn btn-sm btn-outline btn-error">Logout</a></button>
                             </div>
                         ):(
-                            <div className="space-x-2">
-                                <Link to={ROUTES.LOGIN}><a className="btn">Login</a></Link>
-                                <Link to={ROUTES.REGISTER}><a className="btn">Register</a></Link>
+                            <div className="space-x-2 flex gap-1 flex-col items-center md:flex-row">
+                                <Link to={ROUTES.LOGIN}><a className="btn btn-sm md:btn">Login</a></Link>
+                                <Link to={ROUTES.REGISTER}><a className="btn btn-sm md:btn">Register</a></Link>
                             </div>
                         )
                     }
