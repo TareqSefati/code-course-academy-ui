@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 export default function Register() {
     const navigate = useNavigate();
-    const {createUser, updateUserProfile} = useContext(AuthContext);
+    const {createUser, updateUserProfile, logOut} = useContext(AuthContext);
     const handleRegister = (event)=>{
         event.preventDefault();
         const form = new FormData(event.currentTarget);
@@ -35,7 +35,10 @@ export default function Register() {
     const handleUserProfile = (name, photo) => {
         const profile = { displayName: name, photoURL: photo };
         updateUserProfile(profile)
-          .then(() => {})
+          .then(() => {
+            //The following logout() function is to logout the registered user by force.
+            logOut();
+          })
           .catch((error) => {
             console.log(error);
           });
